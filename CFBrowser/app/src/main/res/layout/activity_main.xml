@@ -30,7 +30,8 @@
                 android:layout_toLeftOf="@+id/imageButtonGo"
                 android:layout_toStartOf="@+id/imageButtonGo"
                 android:hint="@string/sURL"
-                android:layout_weight="0.96" />
+                android:layout_weight="0.96"
+                android:inputType="textUri" />
 
             <ImageButton
                 android:background="@android:color/transparent"

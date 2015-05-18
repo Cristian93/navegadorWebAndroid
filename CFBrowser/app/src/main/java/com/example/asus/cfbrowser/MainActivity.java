@@ -1,5 +1,8 @@
 package com.example.asus.cfbrowser;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,6 +36,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         imageButtonForward= (ImageButton) findViewById(R.id.imageButtonForward);
 
         webViewScreen= (WebView) findViewById(R.id.webViewScreen);
+
+        // Evita que los enlaces se abran fuera nuestra app ( navegador de android)
         webViewScreen.setWebViewClient(new WebViewClient());
 
         imageButtonGo.setOnClickListener(this);
@@ -50,17 +55,52 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        Intent i;
+
+
+        switch (item.getItemId()) {
+            case R.id.item1:
+                editTextURL.setText("Ha oprimido la opcion 1");
+
+
+                return true;
+
+            case R.id.item2:
+                editTextURL.setText("ha oprimido la opcion 2");
+
+
+                return true;
+            case R.id.item3:
+                editTextURL.setText("ha oprimido la opcion 3");
+
+                return true;
+            case R.id.item4:
+                editTextURL.setText("ha oprimido la opcion 3.1");
+
+
+                return true;
+
+            case R.id.item5:
+                editTextURL.setText("ha oprimido la opcion 3.2");
+
+
+                return true;
+
+
+            case R.id.item6:
+
+                finish();
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
@@ -90,14 +130,60 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.imageButtonBack:
 
-                Toast.makeText(getBaseContext(), "back"+ editTextURL.getText().toString() , Toast.LENGTH_SHORT).show();
+                if (webViewScreen.canGoBack()){
+
+                    webViewScreen.goBack();
+
+                    editTextURL.setText(webViewScreen.getOriginalUrl());
+
+                }
+                else{
+
+                    Toast.makeText(getBaseContext(),"Not there are more pages visited",Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder dialogBox = new AlertDialog.Builder(this);
+
+                    dialogBox.setMessage("Do you wish exit of the app?");
+
+                    dialogBox.setCancelable(false);
+
+                    dialogBox.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialogBox, int which) {
+                            finish();
+                        }
+                    });
+
+                    dialogBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialogBox, int which) {
+                            dialogBox.cancel();
+                        }
+                    });
+
+
+                    dialogBox.show();
+                }
 
                 break;
 
 
             case R.id.imageButtonForward:
 
-                Toast.makeText(getBaseContext(), "adelante", Toast.LENGTH_SHORT).show();
+
+                if(webViewScreen.canGoForward()){
+                    webViewScreen.goForward();
+                    editTextURL.setText(webViewScreen.getOriginalUrl());
+                }
+                else{
+
+                    Toast.makeText(getBaseContext(), "Not there are more pages to visit", Toast.LENGTH_SHORT).show();
+
+                }
+
+
 
                 break;
 
