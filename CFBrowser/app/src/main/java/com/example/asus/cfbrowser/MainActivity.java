@@ -31,18 +31,22 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         editTextURL= (EditText) findViewById(R.id.editTextURL);
+
         imageButtonGo= (ImageButton) findViewById(R.id.imageButtonGo);
         imageButtonBack= (ImageButton) findViewById(R.id.imageButtonBack);
         imageButtonForward= (ImageButton) findViewById(R.id.imageButtonForward);
 
         webViewScreen= (WebView) findViewById(R.id.webViewScreen);
-
         // Evita que los enlaces se abran fuera nuestra app ( navegador de android)
         webViewScreen.setWebViewClient(new WebViewClient());
 
         imageButtonGo.setOnClickListener(this);
         imageButtonBack.setOnClickListener(this);
         imageButtonForward.setOnClickListener(this);
+
+        // Pagina predeterminada
+        //editTextURL.setText("http://google.com");
+        // webViewScreen.loadUrl(editTextURL.getText().toString());
 
     }
 
@@ -61,35 +65,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
         switch (item.getItemId()) {
+
+
             case R.id.item1:
-                editTextURL.setText("Ha oprimido la opcion 1");
+                webViewScreen.clearHistory();
+                webViewScreen.clearCache(true);
 
 
                 return true;
 
             case R.id.item2:
-                editTextURL.setText("ha oprimido la opcion 2");
-
-
-                return true;
-            case R.id.item3:
-                editTextURL.setText("ha oprimido la opcion 3");
-
-                return true;
-            case R.id.item4:
-                editTextURL.setText("ha oprimido la opcion 3.1");
-
-
-                return true;
-
-            case R.id.item5:
-                editTextURL.setText("ha oprimido la opcion 3.2");
-
-
-                return true;
-
-
-            case R.id.item6:
 
                 finish();
 
@@ -119,7 +104,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                     Toast.makeText(getBaseContext(), "Directing to "+ editTextURL.getText().toString() , Toast.LENGTH_SHORT).show();
 
-                    webViewScreen.loadUrl(editTextURL.getText().toString());
+                    webViewScreen.loadUrl("http://"+editTextURL.getText().toString());
 
                 }
 
