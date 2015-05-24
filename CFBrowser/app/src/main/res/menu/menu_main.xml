@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
 
-    <item android:id="@+id/item1" android:title="Clear browsing data"> </item>
-    <item android:id="@+id/item2" android:title="Exit"></item>
+    <item android:id="@+id/item1" android:title="Clear history"> </item>
+    <item android:id="@+id/item2" android:title="Exit" ></item>
 
 
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="always" />
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

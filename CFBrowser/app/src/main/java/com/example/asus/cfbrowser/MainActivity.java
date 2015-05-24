@@ -39,14 +39,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         webViewScreen= (WebView) findViewById(R.id.webViewScreen);
         // Evita que los enlaces se abran fuera nuestra app ( navegador de android)
         webViewScreen.setWebViewClient(new WebViewClient());
+        // zoom with two fingers
+        webViewScreen.getSettings().setBuiltInZoomControls(true);
 
         imageButtonGo.setOnClickListener(this);
         imageButtonBack.setOnClickListener(this);
         imageButtonForward.setOnClickListener(this);
 
-        // Pagina predeterminada
-        //editTextURL.setText("http://google.com");
-        // webViewScreen.loadUrl(editTextURL.getText().toString());
+        //Pagina predeterminada
+        editTextURL.setText("google.com");
+        webViewScreen.loadUrl("http://"+editTextURL.getText().toString());
 
     }
 
@@ -119,7 +121,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                     webViewScreen.goBack();
 
-                    editTextURL.setText(webViewScreen.getOriginalUrl());
+                    editTextURL.setText(webViewScreen.getOriginalUrl().substring(7));
 
                 }
                 else{
@@ -160,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                 if(webViewScreen.canGoForward()){
                     webViewScreen.goForward();
-                    editTextURL.setText(webViewScreen.getOriginalUrl());
+                    editTextURL.setText(webViewScreen.getOriginalUrl().substring(7));
                 }
                 else{
 
